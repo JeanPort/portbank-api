@@ -1,4 +1,4 @@
-package br.com.jean.portbank.cliente.service;
+package br.com.jean.portbank.service;
 
 import br.com.jean.portbank.dto.ClienteDTO;
 import br.com.jean.portbank.service.cliente.IClienteService;
