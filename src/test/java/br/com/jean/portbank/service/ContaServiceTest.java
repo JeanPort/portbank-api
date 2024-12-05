@@ -9,8 +9,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class ContaServiceTest {
@@ -40,6 +39,6 @@ public class ContaServiceTest {
 
     @Test
     public void deveriaRetornarNullComClienteInexistente(){
-        assertEquals(service.cadastrarNovaConta(contaInvalida), null);
+        assertNull(service.cadastrarNovaConta(contaInvalida));
     }
 }

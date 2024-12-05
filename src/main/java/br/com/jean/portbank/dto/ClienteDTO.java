@@ -4,6 +4,7 @@ import br.com.jean.portbank.model.Cliente;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
 
@@ -11,8 +12,8 @@ public record ClienteDTO(
         @NotNull String nome,
         @NotNull @Email String email,
         @NotNull @CPF String cpf,
-        @NotNull @Min(11) String telefone,
-        @NotNull @Min(8) String senha
+        @NotNull @Length(min = 11) String telefone,
+        @NotNull @Length(min = 4) String senha
 ) {
 
     public Cliente toCliente(){
