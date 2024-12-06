@@ -84,4 +84,80 @@ public class TransacaoAPITest {
                 .contentType("application/json")
                 .content(str)).andExpect(MockMvcResultMatchers.status().is(400));
     }
+
+    @Test
+    public void sholdInvalidTransferenciaDueDestinationAccount()throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        String str = mapper.writeValueAsString(transferenciaDestinoInvalido);
+
+        mvc.perform(MockMvcRequestBuilders.post("/transferencias")
+                .contentType("application/json")
+                .content(str)).andExpect(MockMvcResultMatchers.status().is(400));
+    }
+
+    @Test
+    public void sholdInvalidTransferenciaDueOriginAccount()throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        String str = mapper.writeValueAsString(transferenciaOrigemInvalida);
+
+        mvc.perform(MockMvcRequestBuilders.post("/transferencias")
+                .contentType("application/json")
+                .content(str)).andExpect(MockMvcResultMatchers.status().is(400));
+    }
+
+    @Test
+    public void sholdInvalidTransferenciaDueBalance()throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        String str = mapper.writeValueAsString(transferenciaSaldoInsuficiente);
+
+        mvc.perform(MockMvcRequestBuilders.post("/transferencias")
+                .contentType("application/json")
+                .content(str)).andExpect(MockMvcResultMatchers.status().is(400));
+    }
+
+    @Test
+    public void sholdPerformTransferencia() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        String str = mapper.writeValueAsString(transferenciaValida);
+
+        mvc.perform(MockMvcRequestBuilders.post("/transferencias")
+                .contentType("application/json")
+                .content(str)).andExpect(MockMvcResultMatchers.status().is(201));
+    }
+
+    @Test
+    public void sholdPerformExtratos() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        String str = mapper.writeValueAsString(extratoValido);
+
+        mvc.perform(MockMvcRequestBuilders.get("/extratos")
+                .contentType("application/json")
+                .content(str)).andExpect(MockMvcResultMatchers.status().is(200));
+    }
+    @Test
+    public void shouldReturnErrorWhenAccountIsInvalid() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        String str = mapper.writeValueAsString(extratoContaInvalida);
+
+        mvc.perform(MockMvcRequestBuilders.get("/extratos")
+                .contentType("application/json")
+                .content(str)).andExpect(MockMvcResultMatchers.status().is(400));
+    }
+
+    @Test
+    public void shouldReturnErrorWhenDateIsInvalid() throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        String str = mapper.writeValueAsString(extratoDataInvalida);
+
+        mvc.perform(MockMvcRequestBuilders.get("/extratos")
+                .contentType("application/json")
+                .content(str)).andExpect(MockMvcResultMatchers.status().is(400));
+    }
 }
